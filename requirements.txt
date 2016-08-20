@@ -1,0 +1,7 @@
+php7
+sqlite3
+nginx
+ubuntu 16.04
+imagick for php
+phalcon
+

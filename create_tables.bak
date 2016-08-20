@@ -1,0 +1,58 @@
+CREATE TABLE users(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username varchar(70) UNIQUE,
+  first_name varchar(70),
+  last_name varchar(70),
+  timestamp varchar(70),
+  email varchar(70) UNIQUE
+);
+
+CREATE TABLE posts(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER,
+  content varchar(70) NOT NULL,
+  timestamp varchar(70),
+  mentions INTEGER,
+  FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+CREATE TABLE followers(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  follower_id INTEGER,
+  followed_id INTEGER,
+  FOREIGN KEY(follower_id) REFERENCES users(id),
+  FOREIGN KEY(followed_id) REFERENCES users(id)
+);
+
+CREATE TABLE auth(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER,
+  username varchar(70),
+  password varchar(70),
+  FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+CREATE TABLE mentions(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER DEFAULT 0,
+  post_id INTEGER,
+  shoutout INTEGER NOT NULL CHECK (shoutout IN (0,1)),
+  FOREIGN KEY(user_id) REFERENCES users(id),
+  FOREIGN KEY(post_id) REFERENCES posts(id)
+);
+
+CREATE TABLE hashtags(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  value varchar(70) UNIQUE
+);
+
+CREATE TABLE hashpost(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  hashtag_id INTEGER NOT NULL,
+  post_id INTEGER NOT NULL,
+  FOREIGN KEY(hashtag_id) REFERENCES hashtags(id),
+  FOREIGN KEY(post_id) REFERENCES posts(id)
+);
+
+
+-- INSERT INTO TABLE_NAME (column1, column2, column3,...columnN) VALUES (value1, value2, value3,...valueN);
