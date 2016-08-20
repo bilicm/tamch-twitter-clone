@@ -1,0 +1,99 @@
+<?php
+
+$postcontent = "";
+
+if (!isset($posts)){
+	$postcontent = "No posts to display.";
+} else {
+
+	foreach ($posts as $post){
+		$postcontent .= "
+                     <li class=\"by-me\">
+                        <div class=\"avatar pull-left\">
+                          <img src=\"/" . $img ."\" alt=\"\"/>
+                        </div>
+                        <div class=\"chat-content\">
+                          <div class=\"chat-meta\"><a href=\"user/profile/" . $username . "\">@" . $username . "</a> <span class=\"pull-right\">" . $post['timestamp'] . "</span></div>
+                          " . getLink($post['content']) ."
+                          <div class=\"clearfix\"></div>
+                        </div>
+                      </li> ";
+	}
+}
+
+if ($my_profile){
+	$postarea ='<div class="row">
+	                      <div class="form quick-post">
+                                      <!-- Edit profile form (not working)-->
+                                      <form method="post" action="../posts" class="form-horizontal">   
+                                          <!-- Content --!>
+                                            <div class="col-lg-12">
+                                              <textarea class="form-control" name="content" max-length="160" id="content"></textarea>
+                                            </div>
+                                          </div>                           
+                                           <!-- Buttons -->
+                                          <div class="form-group">
+                                             <!-- Buttons -->
+						 <div class="col-lg-9">
+						<button formmethod="post" style="margin-bottom: 12px;"type="submit" class="btn btn-default">Publish</button>
+						 </div>
+                                          </div>
+                                      </form>
+                                    </div>
+                  
+
+                  </div>';
+	/*$postarea .='<div class="row" style="margin-bottom:12px" >
+			<div class="col-lg-4"><button class="btn btn-primary btn-sm btn-block">Posts</button></div>
+			<div class="col-lg-4"><button class="btn btn-default btn-sm btn-block">Following</button></div>
+			<div class="col-lg-4"><button class="btn btn-default btn-sm btn-block">Followers</button></div>
+		     </div>';*/
+
+} else {
+	if($session){
+		if(!$none){
+			$postarea ="<form action=\"../follow/$username\">";
+				if($following){
+					$postarea .= "<input class=\"btn btn-default\" type=\"submit\" formmethod=\"post\" value=\"Unfollow\">";
+				} else {
+				$postarea .= "<input class=\"btn btn-default\" type=\"submit\" formmethod=\"post\" value=\"Follow\">";
+				}
+			$postarea .= "</form>
+			<br />";
+		} else {
+			$postarea = "<b>User Invalid</b>";
+		}
+	}
+}
+?>
+
+<title>TaMCh Inc. | Profile</title>
+
+ <body>
+  <section id="container" class="">      
+      <section id="main-content">
+          <section class="wrapper">           
+           <?php echo $postarea; ?>
+          
+	   <div class="row">
+            <div class="col-lg-12">
+              <div class="panel panel-default">
+		<div class="panel-heading">
+                  <div class="pull-left">Posts</div>
+                  </div>  
+                  <div class="clearfix"></div>
+                </div>
+                <div class="panel-body">
+                  <div class="padd sscroll">
+		 	<ul class="chats">
+                   <?php echo $postcontent; ?>
+			</ul>
+                  </div>
+                </div>
+              </div> 
+            </div>
+          </section>
+      </section>
+  </section>
+ </body>
+</html>

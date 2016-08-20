@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->    
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/public/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/public/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/public/css/font-awesome.min.css" rel="stylesheet" />    
+    <link href="/public/css/style.css" rel="stylesheet">
+    <link href="/public/css/style-responsive.css" rel="stylesheet" />
+  </head>
+
+<?php 
+
+$username = $this->session->get("username");
+			if(isset($username)){
+				echo '<div class="row">
+					<div class="col-lg-2"><a href="/"><img src="/public/img/test.png" /></a> TaMCh Inc.</div>
+					<form class="form-inline" action="/user/find" method="post"><div class="col-lg-5"><input class="form-control" name="name" formmethod="post" id="name"> </input> <button class="btn btn-info" type="submit">Find</button></div></form>
+					<div class="col-lg-1"><a href="/homepage" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">Homepage</a></div>
+					<div class="col-lg-1"><a href="/user/profile/' . $username . '" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">' . $username . '</a></div>
+					<div class="col-lg-1"><a href="/user/mentions/' . $username . '" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">Mentions</a></div>
+					<div class="col-lg-1"><a href="/user/settings" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">Settings</a></div>
+					<div class="col-lg-1"><a href="/user/logout" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">Logout</a></div>
+				     </div>';
+			} else {
+				echo "<td width = \"50\"><a href=\"/\"><img src=\"/public/img/test.png\" /></a></td>
+				<td align=\"left\" valign=\"middle\" ><b> TaMCh Inc.</b></td>";
+
+			}
+echo $this->getContent();

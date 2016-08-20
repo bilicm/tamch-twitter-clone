@@ -1,0 +1,22 @@
+    <title>TaMCh Inc. | Settings</title>
+
+ <body>
+  <!-- container section start -->
+  <section id="container" class="">      
+      <section id="main-content">
+          <section class="wrapper">           
+          <div class="row">
+            <div class="col-lg-12">
+		<?php echo "<img src=\"/$img\" />";?>
+	     	<form enctype="multipart/form-data" action="/user/upload" method="POST">
+			<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+			Send this file: <input class="btn btn-default" name="profilePic" type="file" />
+			<input class="btn btn-default" type="submit" value="Upload File" />
+		</form>
+              </div> 
+            </div>
+          </section>
+      </section>
+  </section>
+ </body>
+</html>

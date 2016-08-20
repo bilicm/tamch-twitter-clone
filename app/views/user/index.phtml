@@ -1,0 +1,65 @@
+<html>
+
+<?php
+
+if ($my_profile){
+	echo	"<form action=\"../posts\">
+			<table style=\"width:100%\" align=\"center\">
+				<tr>
+					<td rowspan = \"2\" align = \"left\" width = \"35%\">
+						<ul>
+							<li><a href=\"/followers\">Following</a></li>
+							<li><a href=\"/followers\">Followers</a></li>
+						</ul>
+					</td>
+					<td>
+						<textarea rows=\"4\" cols=\"60\" name=\"content\" maxlength=\"160\"></textarea>
+					</td> 
+				</tr>
+				<tr>
+					<td><input type=\"submit\" formmethod=\"post\" value=\"Submit\"></td>
+				</tr>
+			</table>
+		</form>
+	<br />";
+} else {
+	if($session){
+		if(!$none){
+			echo	"<form action=\"../follow/$username\">";
+				if($following){
+					echo "<input type=\"submit\" formmethod=\"post\" value=\"Unfollow\">";
+				} else {
+				echo "<input type=\"submit\" formmethod=\"post\" value=\"Follow\">";
+				}
+			echo "</form>
+			<br />";
+		} else {
+			echo "<b>User Invalid</b>";
+		}
+	}
+}
+
+
+if (!isset($posts)){
+	echo "	<table style=\"width:600\" align=\"center\">
+				<tr>
+					<td>No posts to display here.</td>
+				</tr>
+			</table>";
+} else {
+
+	foreach ($posts as $post){
+		echo "	<table style=\"width:30%\" align=\"center\">
+					<tr>
+						<td rowspan=\"2\" width=\"50\"><img src=\"/$img\" /></td>
+						<td >@$username " . $post['timestamp'] . "</td>
+						<!--<td align=\"right\">" . $post['timestamp'] . "</td>-->
+					</tr>
+					<tr>
+						<td>" . $post['content'] . "</td>
+					</tr>
+				</table><br />";
+	}
+}
+
+echo "</html>";

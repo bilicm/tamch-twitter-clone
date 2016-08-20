@@ -1,0 +1,57 @@
+<?php
+
+$postcontent = "";
+
+if (!isset($posts)){
+	$postcontent = "No posts to display.";
+} else {
+
+	foreach ($posts as $post){
+		$postcontent .= "
+                     <li class=\"by-me\">
+                        <div class=\"avatar pull-left\">
+                          <img src=\"/public/img/user/" . checkImage($post['username']) ."/small/avatar.jpg\" alt=\"\"/>
+                        </div>
+                        <div class=\"chat-content\">
+                          <div class=\"chat-meta\"><a href=\"user/profile/" . $post['username'] . "\">@" . $post['username'] . "</a> <span class=\"pull-right\">" . $post['timestamp'] . "</span></div>
+                          " . getLink($post['content']) ."
+                          <div class=\"clearfix\"></div>
+                        </div>
+                      </li> ";
+	}
+}
+?>
+
+    <title>TaMCh Inc. | Home</title>
+
+  <body>
+  <!-- container section start -->
+  <section id="container" class="">      
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">           
+          <div class="row">
+            <div class="col-lg-12">
+              <!-- Widget -->
+              <div class="panel panel-default">
+				<div class="panel-heading">
+                  <div class="pull-left">Posts</div>
+                  </div>  
+                  <div class="clearfix"></div>
+                </div>
+
+                <div class="panel-body">
+                  <div class="padd sscroll">
+		 	<ul class="chats">
+                   		<?php echo $postcontent; ?>
+			</ul>
+                  </div>
+                </div>
+              </div> 
+            </div>
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+ </body>
+</html>

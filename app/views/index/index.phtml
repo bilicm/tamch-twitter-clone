@@ -1,0 +1,8 @@
+<?php 
+$username = $this->session->get("username");
+
+if(!isset($username)){
+	$this->response->redirect("/user/login");
+} else {
+	$this->response->redirect("/homepage");
+}
